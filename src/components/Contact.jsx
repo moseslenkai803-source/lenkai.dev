@@ -1,4 +1,37 @@
- function Contact() {
+import { useState } from "react";
+
+const CONTACT_EMAIL = "your-email@example.com";
+
+function Contact() {
+  const [formStatus, setFormStatus] = useState("idle");
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setFormStatus("sending");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Message could not be sent");
+      }
+
+      form.reset();
+      setFormStatus("sent");
+    } catch {
+      setFormStatus("error");
+    }
+  }
+
   return (
     <section
       id="contact"
@@ -51,7 +84,7 @@
           {/* Email CTA */}
           <div className="mt-10">
             <a
-              href="mailto:your-email@example.com"
+              href="#contact-form"
               className="group inline-flex items-center gap-4 rounded-full bg-white px-7 py-4 text-sm font-medium text-black transition-all duration-300 hover:bg-blue-500 hover:text-white"
             >
               Get in touch
@@ -62,13 +95,74 @@
             </a>
           </div>
 
+          <form
+            id="contact-form"
+            className="mt-12 max-w-2xl space-y-5"
+            onSubmit={handleSubmit}
+          >
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="text-sm text-gray-300">
+                Name
+                <input
+                  required
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition-colors placeholder:text-gray-600 focus:border-blue-500"
+                  placeholder="Your name"
+                />
+              </label>
+
+              <label className="text-sm text-gray-300">
+                Email
+                <input
+                  required
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition-colors placeholder:text-gray-600 focus:border-blue-500"
+                  placeholder="you@example.com"
+                />
+              </label>
+            </div>
+
+            <label className="block text-sm text-gray-300">
+              Message
+              <textarea
+                required
+                name="message"
+                rows="5"
+                className="mt-2 w-full resize-y rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition-colors placeholder:text-gray-600 focus:border-blue-500"
+                placeholder="Tell me about your idea..."
+              />
+            </label>
+
+            <input type="hidden" name="_subject" value="New portfolio enquiry" />
+            <input type="hidden" name="_captcha" value="false" />
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button
+                type="submit"
+                disabled={formStatus === "sending"}
+                className="inline-flex items-center justify-center rounded-full bg-blue-500 px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {formStatus === "sending" ? "Sending..." : "Send message"}
+              </button>
+
+              <p aria-live="polite" className="text-sm text-gray-400">
+                {formStatus === "sent" && "Thanks. Your message is on its way."}
+                {formStatus === "error" && "Something went wrong. Please try again."}
+              </p>
+            </div>
+          </form>
+
         </div>
 
         {/* Contact Links */}
-        <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">
+        <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
 
           <a
-            href="https://github.com/"
+            href="https://github.com/moseslenkai803-source"
             target="_blank"
             rel="noopener noreferrer"
             className="group bg-black p-8 transition-colors duration-300 hover:bg-white/[0.03]"
@@ -87,7 +181,7 @@
           </a>
 
           <a
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/in/moses-lenkai/"
             target="_blank"
             rel="noopener noreferrer"
             className="group bg-black p-8 transition-colors duration-300 hover:bg-white/[0.03]"
@@ -106,7 +200,7 @@
           </a>
 
           <a
-            href="mailto:your-email@example.com"
+            href="#contact-form"
             className="group bg-black p-8 transition-colors duration-300 hover:bg-white/[0.03]"
           >
             <span className="mb-8 block text-xs uppercase tracking-[0.2em] text-gray-600">
@@ -119,6 +213,23 @@
 
             <p className="mt-2 text-sm text-gray-500 transition-colors group-hover:text-gray-300">
               Send me a message →
+            </p>
+          </a>
+
+          <a
+            href="tel:+254741557458"
+            className="group bg-black p-8 transition-colors duration-300 hover:bg-white/[0.03]"
+          >
+            <span className="mb-8 block text-xs uppercase tracking-[0.2em] text-gray-600">
+              04
+            </span>
+
+            <h3 className="text-xl font-medium">
+              Phone
+            </h3>
+
+            <p className="mt-2 text-sm text-gray-500 transition-colors group-hover:text-gray-300">
+              0741557458 →
             </p>
           </a>
 
