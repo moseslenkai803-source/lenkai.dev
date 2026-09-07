@@ -1,10 +1,16 @@
+import heroVisual from "../assets/hero-visual.svg";
+
 export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden bg-black px-6 pt-24 text-white"
+      className="relative flex min-h-screen items-center overflow-hidden bg-[#07111f] px-6 pt-24 text-white"
+      style={{
+        backgroundImage: `linear-gradient(90deg, rgba(7, 17, 31, 0.98) 0%, rgba(7, 17, 31, 0.88) 42%, rgba(7, 17, 31, 0.55) 100%), url(${heroVisual})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
     >
-      {/* Background Grid */}
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute inset-0 opacity-[0.08]"
@@ -17,15 +23,11 @@ export default function Hero() {
           }}
         />
 
-        {/* Glow */}
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/10 blur-[120px]" />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="max-w-4xl">
 
-          {/* Intro */}
           <div className="mb-8 flex items-center gap-3">
             <span className="h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
 
@@ -34,7 +36,6 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Main Heading */}
           <h1 className="text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
             I build
             <br />
@@ -49,14 +50,12 @@ export default function Hero() {
             <span className="text-blue-500"> matter.</span>
           </h1>
 
-          {/* Description */}
           <p className="mt-8 max-w-2xl text-base leading-7 text-gray-400 sm:text-lg">
             I'm Moses Lenkai, a software engineer and founder focused on
             building thoughtful digital experiences, solving real-world
             problems, and turning ambitious ideas into working products.
           </p>
 
-          {/* Actions */}
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
 
             <a
@@ -80,7 +79,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Bottom Information */}
         <div className="mt-20 flex flex-col gap-6 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
 
           <p className="text-xs uppercase tracking-[0.18em] text-gray-500">

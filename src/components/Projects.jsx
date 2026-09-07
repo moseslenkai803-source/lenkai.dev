@@ -1,7 +1,16 @@
+import nestifyImage from "../assets/projects/Nestify1.jpg";
+import eventExplorerImage from "../assets/projects/EventExplorer1.jpg";
+import coldChainTrackerImage from "../assets/projects/ColdChainTracker1.webp";
+import careLinkImage from "../assets/projects/CareLink1.jpg";
+
 const projects = [
   {
     title: "Nestify",
     category: "Featured Project",
+    image: nestifyImage,
+    imageAlt: "Nestify property platform interface with a location map and property details",
+    visualLabel: "Property identity",
+    visualDetail: "Verified locations · Map intelligence",
     description:
       "A property platform exploring digital addressing, verified property identities, and smarter ways to connect people with spaces.",
     technologies: ["React", "Python", "FastAPI", "Tailwind CSS"],
@@ -10,6 +19,10 @@ const projects = [
   {
     title: "Event Explorer",
     category: "Web Application",
+    image: eventExplorerImage,
+    imageAlt: "Event Explorer interface with a map and event listings",
+    visualLabel: "Discover nearby",
+    visualDetail: "Search · Filters · Event details",
     description:
       "A React application for discovering events with category filtering, search, reusable components, and responsive UI.",
     technologies: ["React", "JavaScript", "CSS"],
@@ -18,17 +31,25 @@ const projects = [
   {
     title: "Cold Chain Tracker",
     category: "Logistics",
+    image: coldChainTrackerImage,
+    imageAlt: "Cold Chain Tracker dashboard with shipment temperature data",
+    visualLabel: "Live shipment health",
+    visualDetail: "Temperature · Routes · Alerts",
     description:
       "A digital interface designed to monitor refrigerated transport and visualize important logistics information.",
     technologies: ["React", "UI/UX", "Dashboard"],
     featured: false,
   },
   {
-    title: "Color Clock",
-    category: "Creative Project",
+    title: "CareLink",
+    category: "Product Concept",
+    image: careLinkImage,
+    imageAlt: "CareLink healthcare appointment platform preview",
+    visualLabel: "Appointments, simplified",
+    visualDetail: "Care discovery · Scheduling · Patient access",
     description:
-      "An interactive clock that transforms time into a dynamic visual experience using color.",
-    technologies: ["JavaScript", "Vite", "date-fns"],
+      "A patient-first healthcare platform concept for discovering providers, booking appointments, and keeping care within reach.",
+    technologies: ["React", "UX Design", "API Design"],
     featured: false,
   },
 ];
@@ -41,7 +62,6 @@ export default function Projects() {
     >
       <div className="mx-auto max-w-7xl">
 
-        {/* Section Header */}
         <div className="mb-16 grid gap-8 md:grid-cols-2 md:items-end">
 
           <div>
@@ -65,7 +85,6 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* Featured Project */}
         {projects
           .filter((project) => project.featured)
           .map((project) => (
@@ -73,39 +92,45 @@ export default function Projects() {
               key={project.title}
               className="group relative mb-px overflow-hidden rounded-t-2xl border border-white/10 bg-white/[0.02]"
             >
-              {/* Visual Area */}
-              <div className="relative flex min-h-[360px] items-center justify-center overflow-hidden border-b border-white/10 bg-gradient-to-br from-blue-950/40 via-black to-black md:min-h-[480px]">
-
-                {/* Grid */}
-                <div
-                  className="absolute inset-0 opacity-[0.12]"
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)
-                    `,
-                    backgroundSize: "50px 50px",
-                  }}
-                />
-
-                {/* Center Visual */}
-                <div className="relative z-10 text-center">
-                  <div className="mb-4 text-sm uppercase tracking-[0.3em] text-blue-400">
-                    Nestify
+              <div className="relative overflow-hidden border-b border-white/10 bg-[#101827] p-3 sm:p-5 md:p-8">
+                <div className="overflow-hidden rounded-xl border border-white/15 bg-black shadow-2xl shadow-blue-950/20">
+                  <div className="flex h-8 items-center gap-1.5 border-b border-black/10 bg-white/90 px-3">
+                    <span className="h-2 w-2 rounded-full bg-[#ff6b6b]" />
+                    <span className="h-2 w-2 rounded-full bg-[#ffc857]" />
+                    <span className="h-2 w-2 rounded-full bg-[#63d297]" />
+                    <span className="ml-3 h-3 w-1/3 rounded-full bg-black/10" />
                   </div>
-
-                  <div className="text-6xl font-semibold tracking-tighter text-white md:text-8xl">
-                    N.
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.imageAlt}
+                      className="block aspect-[16/9] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                    />
+                  ) : (
+                    <div className="flex aspect-[16/9] w-full items-center justify-center bg-[#14263c] px-6 text-center">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.2em] text-blue-300">
+                          {project.visualLabel}
+                        </p>
+                        <p className="mt-3 text-sm text-blue-100/60">
+                          Project image coming soon
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 sm:bottom-12 sm:left-12 sm:right-12">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.2em] text-blue-600">
+                        {project.visualLabel}
+                      </p>
+                      <p className="mt-2 text-xs text-gray-600">
+                        {project.visualDetail}
+                      </p>
+                    </div>
                   </div>
-
-                  <p className="mt-4 text-sm text-gray-500">
-                    Property · Addressing · Location
-                  </p>
                 </div>
-
               </div>
 
-              {/* Project Information */}
               <div className="grid gap-8 p-8 md:grid-cols-[1fr_auto] md:p-12">
 
                 <div>
@@ -121,7 +146,6 @@ export default function Projects() {
                     {project.description}
                   </p>
 
-                  {/* Technologies */}
                   <div className="mt-8 flex flex-wrap gap-2">
                     {project.technologies.map((technology) => (
                       <span
@@ -134,9 +158,8 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* CTA */}
                 <div className="flex items-end">
-                  <p className="rounded-full border border-white/15 px-5 py-3 text-sm text-gray-400">
+                  <p className="border-l border-blue-500 pl-4 text-sm text-gray-400">
                     Case study coming soon
                   </p>
                 </div>
@@ -145,20 +168,18 @@ export default function Projects() {
             </div>
           ))}
 
-        {/* Other Projects */}
         <div className="grid gap-px overflow-hidden rounded-b-2xl border-x border-b border-white/10 bg-white/10 md:grid-cols-3">
 
           {projects
             .filter((project) => !project.featured)
-            .map((project) => (
+            .map((project, projectIndex) => (
               <article
                 key={project.title}
-                className="group flex min-h-[360px] flex-col bg-black p-8 transition-colors duration-300 hover:bg-white/[0.03]"
+                className="group flex min-h-[420px] flex-col bg-black transition-colors duration-300 hover:bg-[#080d16]"
               >
-                {/* Project Number */}
-                <div className="mb-12 flex items-center justify-between">
+                <div className="flex items-center justify-between px-8 pb-6 pt-8">
                   <span className="text-sm text-blue-500">
-                    0{projects.indexOf(project) + 1}
+                    0{projectIndex + 1}
                   </span>
 
                   <span className="text-xs uppercase tracking-[0.15em] text-gray-600">
@@ -166,9 +187,33 @@ export default function Projects() {
                   </span>
                 </div>
 
-                {/* Content */}
-                <div className="flex flex-1 flex-col">
-                  <h3 className="mb-4 text-2xl font-medium">
+                <div className="mx-5 overflow-hidden rounded-lg border border-white/10 bg-white/[0.04]">
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.imageAlt}
+                      loading="lazy"
+                      className="block aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                  ) : (
+                    <div className="flex aspect-[4/3] items-center justify-center bg-[#14263c] px-5 text-center">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.18em] text-blue-300">
+                          {project.visualLabel}
+                        </p>
+                        <p className="mt-3 text-xs text-blue-100/60">
+                          Project image coming soon
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex flex-1 flex-col px-8 pb-8 pt-7">
+                  <p className="mb-3 text-[10px] uppercase tracking-[0.18em] text-blue-500">
+                    {project.visualLabel}
+                  </p>
+                  <h3 className="mb-3 text-2xl font-medium text-white">
                     {project.title}
                   </h3>
 
@@ -176,18 +221,12 @@ export default function Projects() {
                     {project.description}
                   </p>
 
-                  {/* Technologies */}
-                  <div className="mt-auto pt-8">
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((technology) => (
-                        <span
-                          key={technology}
-                          className="text-xs text-gray-500"
-                        >
-                          #{technology.replace(/\s+/g, "")}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="mt-auto flex flex-wrap gap-x-3 gap-y-2 pt-7">
+                    {project.technologies.map((technology) => (
+                      <span key={technology} className="text-xs text-gray-500">
+                        #{technology.replace(/\s+/g, "")}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </article>
